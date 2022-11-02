@@ -236,7 +236,7 @@ class App {
   async fetchWeatherData() {
     let weather
     try {
-      let res = await axios.get(SERVER_API + "/api/weather")
+      let res = await axios.get(SERVER_API + "/api/weather/latest")
       weather = await res.data;
     } catch (error) {
       console.log("client WEATHER API ERROR ------------ ", error)
