@@ -26,7 +26,12 @@ export default class GardensLayer extends PIXI.Container {
     Object.values(this.users).forEach(u => {
       if (!u.gardenSection) return
 
+      console.log("current user garden: ", currentUser.gardenSection);
       if (!window.APP.getIsAdmin()) {
+        // update server info to client window
+        // currentUser.gardenSection.width = window.GARDEN_WIDTH;
+        // currentUser.gardenSection.height = window.GARDEN_HEIGHT;
+
         let isWideScreen = (window.innerWidth > window.innerHeight)
         let dX = Math.abs(u.gardenSection.x - currentUser.gardenSection.x)
         let dY = Math.abs(u.gardenSection.y - currentUser.gardenSection.y)

@@ -67,6 +67,7 @@ export default class ResidueBackground extends PIXI.Container {
     const gradientSprite = new PIXI.Sprite(PIXI.Texture.WHITE)
     gradientSprite.width = this.W
     gradientSprite.height = this.H
+    console.log("residue: ", gradientSprite.width, gradientSprite.height);
     gradientSprite.filters = [gradientFilter]  
     this.addChild(gradientSprite)
     
@@ -99,9 +100,15 @@ export default class ResidueBackground extends PIXI.Container {
     
     this.triangleTransitionContainer.addChild(this.triangleTransition)    
   
-    this.triangleTransition.pivot.set(this.W / 2, this.H / 2)
-    this.triangleTransition.position.set(this.W / 2, this.H / 2)
-    this.triangleTransition.rotation = this.anchors[this.currentAnchor] + Math.PI/2
+    if(this.currentAnchor === 0 || this.currentAnchor === 3) {
+      this.triangleTransition.pivot.set(this.W / 2, this.H / 2)
+      this.triangleTransition.position.set(this.W / 2, this.H / 2)
+    } else {
+      this.triangleTransition.pivot.set(this.W / 2, this.H / 2)
+      this.triangleTransition.position.set(this.W / 2, this.H / 2)
+    }
+    this.triangleTransition.rotation = this.anchors[this.currentAnchor] + Math.PI/2  
+    console.log("triangleTransition", this.triangleTransition, this.currentAnchor);
 
     this.addChild(this.triangleTransitionContainer)
   }

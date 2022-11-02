@@ -30,7 +30,8 @@ export default class UserGarden extends PIXI.Container {
   async init() {
     this.bgContainer = new PIXI.Graphics()
     this.bgContainer.beginFill(0xf9f9f9)
-    this.bgContainer.drawRect(0, 0, 1000, 1000)
+    this.bgContainer.drawRect(0, 0, window.GARDEN_WIDTH, window.GARDEN_HEIGHT)
+    console.log("init bg container width height", window.GARDEN_WIDTH, window.GARDEN_HEIGHT)
     this.addChild(this.bgContainer)
     this.drawBackgrounds()    
   }
@@ -63,6 +64,7 @@ export default class UserGarden extends PIXI.Container {
       const currentLoop = currentTile[this.bgAnimationParams.currentTile];
       const shaderRand = shaderSpeed * map(i, 0, 4, 5, 10)
 
+      console.log("animate bg", currentTile, currentLoop)
       await this.tilesContainer.children[i].appear(targetSize, duration, currentLoop.shape, currentLoop.anchor, shaderRand) // appear at 0, disappear after bg2+bg3+bg4_duration
     }
 

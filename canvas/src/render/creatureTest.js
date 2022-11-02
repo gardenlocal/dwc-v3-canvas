@@ -178,8 +178,8 @@ function drawOneMoss(x = 500, y = 500, scale = 1) {
 }
 
 function drawMaskedGradient() {
-  const W = 1000
-  const H = 1000
+  const W = window.GARDEN_WIDTH;
+  const H = window.GARDEN_HEIGHT;
 
   const whiteBg = new PIXI.Graphics()
   whiteBg.beginFill(0x000000)

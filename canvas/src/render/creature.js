@@ -60,7 +60,7 @@ export default class Creature extends PIXI.Container {
         }
 
         this.addChild(this.creature)
-        this.creature.scale.set(appearance.scale * 2)
+        this.creature.scale.set(appearance.scale / 2)
         this.frame = 0
 
         this.firstTargetPositionUpdateComplete = false
@@ -174,12 +174,13 @@ export default class Creature extends PIXI.Container {
         let durationOffset = 0
 
         if (!this.firstTargetPositionUpdateComplete) {
+            // very first time
             const startTime = prop.startTime
             const now = new Date().getTime()
             const previousTime = (now - startTime) / 1000
             const alpha = previousTime / prop.duration
-            const x = lerp(prop.teleport.x, prop.to.x, alpha)
-            const y = lerp(prop.teleport.y, prop.to.y, alpha)
+            const x = lerp(prop.from.x, prop.to.x, alpha)
+            const y = lerp(prop.from.y, prop.to.y, alpha)
             this.position.set(x, y)
 
             durationOffset = previousTime

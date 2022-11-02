@@ -14,8 +14,8 @@ export default class GradientBackground extends PIXI.Container {
     // let tileHeight = spriteSample.height * spriteScale            
     // let verticalTiles = Math.ceil(window.GARDEN_HEIGHT / tileHeight)
     
-    this.W = window.GARDEN_WIDTH
-    this.H = this.W;
+    this.W = window.GARDEN_WIDTH;
+    this.H = window.GARDEN_HEIGHT;
 
     // outline shape
     this.arcShapeMask = new PIXI.Graphics();

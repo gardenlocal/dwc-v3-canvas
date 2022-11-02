@@ -143,7 +143,7 @@ exports.generateMoss = () => {
 
     const childrenSequence = getMossChildrenSequence(creatureType, firstElementType, 20, 25)
     const fillColor = (Math.random() < 0.5) ? 0x0cef42 : 0xfd880b
-    const noVisibleElements = randomIntInRange(6, 18)
+    const noVisibleElements = randomIntInRange(28, 48)
     const evolutionIndex = noVisibleElements
 
     const scale = randomInRange(1, 3)
@@ -312,7 +312,7 @@ exports.generateLichen = () => {
         element.children.push(ch)
     }
 
-    const scale = randomInRange(1, 4)
+    const scale = randomInRange(1, 2)
     const rotation = randomInRange(-Math.PI / 2, Math.PI / 2)
     const fillColor = (Math.random() < 0.5) ? 0x0cef42 : 0xfd880b
     const evolutionIndex = noChildren

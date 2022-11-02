@@ -1,4 +1,4 @@
-import env from './env.js'
+import env, { SERVER_API } from './env.js'
 import { sleep } from './src/render/utils.js';
 import PixiApp from './src/index'
 import { uid } from 'uid';
@@ -6,8 +6,6 @@ import { io } from 'socket.io-client';
 import axios from 'axios';
 // import 'regenerator-runtime/runtime'
 import { ALTTEXT_KO } from './altText-constants.js';
-
-const WEATHER_API = `http://192.168.0.105:3005/weather`
 
 class App {
   constructor() {
@@ -154,6 +152,11 @@ class App {
     // console.log('onUsersUpdate: ', JSON.stringify(users).length, Object.keys(users).length)
     // get single user's garden data
     const currUser = users.find((u => (u.uid == this.user.id)))
+    if(currUser) {
+      currUser.gardenSection.width = window.GARDEN_WIDTH;
+      currUser.gardenSection.height = window.GARDEN_HEIGHT;
+    }
+    console.log("onUsersUpdate", currUser)
     this.selfGarden = currUser ? currUser.gardenSection : null
     this.selfUid = currUser ? currUser.uid : null
 
@@ -229,18 +232,19 @@ class App {
     return JSON.parse(user)
   }
 
+  // update 2022
   async fetchWeatherData() {
     let weather
     try {
-      weather = await axios.get(WEATHER_API)
-      console.log('weather: ', weather)
+      let res = await axios.get(SERVER_API + "/api/weather")
+      weather = await res.data;
     } catch (error) {
-      console.log("ERROR ------------ ", error)
+      console.log("client WEATHER API ERROR ------------ ", error)
       return new Promise((res, rej) => res())
     } finally {
       if (weather && weather.data) {
         const weatherData = weather.data;
-    
+        // console.log('finally weather: ', weather, weatherData.temperature);
         window.TEMPERATURE = weatherData.temperature;
         window.HUMIDITY = weatherData.humidity;  
       }  

@@ -35,8 +35,8 @@ export default class PixiAppWrapper {
   }
 
   setupPixiApp() {
-    this.GARDEN_WIDTH = this.GARDEN_HEIGHT = window.GARDEN_WIDTH = window.GARDEN_HEIGHT = 1000
-
+    this.GARDEN_WIDTH = window.GARDEN_WIDTH = window.innerWidth;
+    this.GARDEN_HEIGHT = window.GARDEN_HEIGHT = window.innerHeight;
     this.pixiContainer = document.querySelector("#root")    
     this.pixiApp = new PIXI.Application({
       antialias: true,
@@ -52,7 +52,7 @@ export default class PixiAppWrapper {
     this.pixiContainer.children[0].style.position = 'absolute'
     this.pixiContainer.children[0].style.top = '0px'
     this.pixiContainer.children[0].style.left = '0px'
-    this.pixiContainer.children[0].style.transform = 'translateX(-25%) translateY(-25%) scale(0.5)'
+    // this.pixiContainer.children[0].style.transform = 'translateX(-25%) translateY(-25%) scale(1.0)'
 
     this.pixiApp.renderer.backgroundColor = 0xf9f9f9;
 
@@ -135,7 +135,7 @@ export default class PixiAppWrapper {
         soundtrack = require('../assets/audio/3.mp3');
         break;
     }
-
+    /*
     if(soundtrack) {
       sound.add('background', {
         url: soundtrack,
@@ -144,7 +144,7 @@ export default class PixiAppWrapper {
         autoPlay: true
       });
     }
-
+    */
     window.AUDIO = sound;
 
   }
@@ -175,13 +175,14 @@ export default class PixiAppWrapper {
   }
 
   resizeAppToWindow() {
-    const scale = Math.min(window.innerWidth, window.innerHeight) / 1000
-    window.DWCApp.stage.scale.set(scale)
+    // update 2022: no more square, fit to window size. No need of scale variable
+    const scale = Math.min(window.innerWidth, window.innerHeight) / 400
+    window.DWCApp.stage.scale.set(1.0);
   
-    if (window.innerWidth < window.innerHeight)
-      window.DWCApp.stage.pivot.set(0, (-window.innerHeight / scale + window.GARDEN_HEIGHT) / 2)
-    else
-      window.DWCApp.stage.pivot.set((-window.innerWidth / scale + window.GARDEN_WIDTH) / 2, 0)    
+    // if (window.innerWidth < window.innerHeight)
+    //   window.DWCApp.stage.pivot.set(0, (-window.innerHeight / scale + window.GARDEN_HEIGHT) / 2)
+    // else
+    //   window.DWCApp.stage.pivot.set((-window.innerWidth / scale + window.GARDEN_WIDTH) / 2, 0)    
   }
   updateOnlineCreatures(onlineUsers, onlineCreatures) {
     if (this.gardenLayer) {
@@ -276,20 +277,24 @@ export default class PixiAppWrapper {
     root.addEventListener('touchstart', () => {
       console.log('touch: start music')
 
+      /*
       if(!sound._sounds?.background?.isPlaying){ // if not playing
         sound.play('background')
         console.log(sound._sounds.background)
       }
+      */
     })
 
     // test for pc version
     root.addEventListener('click', () => {
       console.log('click: start music')
 
+      /*
       if(!sound._sounds?.background?.isPlaying){ // if not playing
         sound.play('background')
         console.log(sound._sounds.background)
       }
+      */
     })
   }
 
